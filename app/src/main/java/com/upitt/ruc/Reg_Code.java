@@ -18,6 +18,7 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
     Button submit;
     TextView textView;
     String memail;
+    TextView no_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,19 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
         editText = (EditText)findViewById(R.id.reg_code);
         submit = (Button)findViewById(R.id.reg_code_submit);
         textView = (TextView)findViewById(R.id.reg_code_message);
+        no_code = (TextView)findViewById(R.id.no_code);
+
+
+        no_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Reg_Code.this,No_Reg_Code.class);
+                intent.putExtra("email",getIntent().getStringExtra("email"));
+                intent.putExtra("givenName",getIntent().getStringExtra("givenName"));
+                startActivity(intent);
+                finish();
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +59,8 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
                 {
                     textView.setText("Please check your Registration code!!");
                     textView.setVisibility(View.VISIBLE);
+                    editText.getText().clear();
+                    Landing_Activity.hideKeyboard(Reg_Code.this);
                 }
 
             }

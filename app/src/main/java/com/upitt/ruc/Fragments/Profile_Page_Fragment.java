@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +46,12 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
     private String mlocation_spinner_item_selected;
     private String mlived_years_item_selected;
     private String maboutMe;
-    private String sports_activities;
-    private String hobbies_interests;
-    private String places;
+    private String msports_activities;
+    private String mhobbies_interests;
+    private String mplaces;
+
+    @BindView(R.id.profile_page_header_cardView)
+    CardView profile_page_header_cardView;
 
     @BindView(R.id.profile_page_name_textView)
     TextView profile_page_name_textView;
@@ -82,6 +86,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
     @BindView(R.id.profile_page_points_textView)
     TextView profile_page_points_textView;
 
+    @BindView(R.id.profile_page_badges_cardView)
+    CardView profile_page_badges_cardView;
+
     @BindView(R.id.profile_page_badge1_imageView)
     ImageView profile_page_badge1_imageView;
 
@@ -90,6 +97,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
     @BindView(R.id.profile_page_badge3_imageView)
     ImageView profile_page_badge3_imageView;
+
+    @BindView(R.id.profile_page_aboutMe_cardView)
+    CardView profile_page_aboutMe_cardView;
 
     @BindView(R.id.profile_page_aboutMe_textView)
     TextView profile_page_aboutMe_textView;
@@ -104,6 +114,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
     @BindView(R.id.profile_page_aboutMe_save)
     ImageView profile_page_aboutMe_save;
 
+    @BindView(R.id.profile_page_sports_activities_cardView)
+    CardView profile_page_sports_activities_cardView;
+
     @BindView(R.id.profile_page_sports_activities_textView)
     TextView profile_page_sports_activities_textView;
 
@@ -116,6 +129,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
     @BindView(R.id.profile_page_sports_activities_save)
     ImageView profile_page_sports_activities_save;
 
+    @BindView(R.id.profile_page_hobbies_interests_cardView)
+    CardView profile_page_hobbies_interests_cardView;
+
     @BindView(R.id.profile_page_hobbies_interests_textView)
     TextView profile_page_hobbies_interests_textView;
 
@@ -127,6 +143,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
     @BindView(R.id.profile_page_hobbies_interests_save)
     ImageView profile_page_hobbies_interests_save;
+
+    @BindView(R.id.profile_page_places_cardView)
+    CardView profile_page_places_cardView;
 
     @BindView(R.id.profile_page_places_textView)
     TextView profile_page_places_textView;
@@ -250,6 +269,27 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
         Glide.with(this).load(profile.getBadge3_url()).into(profile_page_badge3_imageView);
 
 
+        profile_page_header_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_header_cardView.requestFocus();
+            }
+        });
+
+        profile_page_aboutMe_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_aboutMe_cardView.requestFocus();
+            }
+        });
+
+        profile_page_badges_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_badges_cardView.requestFocus();
+            }
+        });
+
         profile_page_aboutMe_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -260,6 +300,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
                 profile_page_aboutMe_textView.setVisibility(View.INVISIBLE);
 
                 profile_page_aboutMe_editText.setVisibility(View.VISIBLE);
+                profile_page_aboutMe_editText.requestFocus();
                 profile_page_aboutMe_editText.setText(maboutMe);
             }
         });
@@ -301,20 +342,44 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
 
         //
+        profile_page_sports_activities_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_sports_activities_cardView.requestFocus();
+            }
+        });
+
         profile_page_sports_activities_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 profile_page_sports_activities_edit.setVisibility(View.INVISIBLE);
                 profile_page_sports_activities_save.setVisibility(View.VISIBLE);
 
-                String content = profile_page_sports_activities_textView.getText().toString();
+                msports_activities = profile_page_sports_activities_textView.getText().toString();
                 profile_page_sports_activities_textView.setVisibility(View.INVISIBLE);
 
                 profile_page_sports_activities_editText.setVisibility(View.VISIBLE);
-                profile_page_sports_activities_editText.setText(content);
+                profile_page_sports_activities_editText.requestFocus();
+                profile_page_sports_activities_editText.setText(msports_activities);
             }
         });
 
+
+        profile_page_sports_activities_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    profile_page_sports_activities_save.setVisibility(View.INVISIBLE);
+                    profile_page_sports_activities_edit.setVisibility(View.VISIBLE);
+
+                    profile_page_sports_activities_editText.setVisibility(View.GONE);
+                    profile.setSports_activities(msports_activities);
+
+                    profile_page_sports_activities_textView.setText(profile.getSports_activities());
+                    profile_page_sports_activities_textView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         profile_page_sports_activities_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,17 +399,41 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
         });
 
         //
+        profile_page_hobbies_interests_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_hobbies_interests_cardView.requestFocus();
+            }
+        });
+
         profile_page_hobbies_interests_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 profile_page_hobbies_interests_edit.setVisibility(View.INVISIBLE);
                 profile_page_hobbies_interests_save.setVisibility(View.VISIBLE);
 
-                String content = profile_page_hobbies_interests_textView.getText().toString();
+                mhobbies_interests = profile_page_hobbies_interests_textView.getText().toString();
                 profile_page_hobbies_interests_textView.setVisibility(View.INVISIBLE);
 
                 profile_page_hobbies_interests_editText.setVisibility(View.VISIBLE);
-                profile_page_hobbies_interests_editText.setText(content);
+                profile_page_hobbies_interests_editText.requestFocus();
+                profile_page_hobbies_interests_editText.setText(mhobbies_interests);
+            }
+        });
+
+        profile_page_hobbies_interests_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    profile_page_hobbies_interests_save.setVisibility(View.INVISIBLE);
+                    profile_page_hobbies_interests_edit.setVisibility(View.VISIBLE);
+
+                    profile_page_hobbies_interests_editText.setVisibility(View.GONE);
+                    profile.setHobbies_interests(mhobbies_interests);
+
+                    profile_page_hobbies_interests_textView.setText(profile.getHobbies_interests());
+                    profile_page_hobbies_interests_textView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -367,17 +456,41 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
 
         //
+        profile_page_places_cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile_page_places_cardView.requestFocus();
+            }
+        });
+
         profile_page_places_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 profile_page_places_edit.setVisibility(View.INVISIBLE);
                 profile_page_places_save.setVisibility(View.VISIBLE);
 
-                String content = profile_page_places_textView.getText().toString();
+                mplaces = profile_page_places_textView.getText().toString();
                 profile_page_places_textView.setVisibility(View.INVISIBLE);
 
                 profile_page_places_editText.setVisibility(View.VISIBLE);
-                profile_page_places_editText.setText(content);
+                profile_page_places_editText.requestFocus();
+                profile_page_places_editText.setText(mplaces);
+            }
+        });
+
+        profile_page_places_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    profile_page_places_save.setVisibility(View.INVISIBLE);
+                    profile_page_places_edit.setVisibility(View.VISIBLE);
+
+                    profile_page_places_editText.setVisibility(View.GONE);
+                    profile.setPlaces(mplaces);
+
+                    profile_page_places_textView.setText(profile.getPlaces());
+                    profile_page_places_textView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -460,6 +573,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
 
+
                 new AlertDialog.Builder(mcontext)
                         .setTitle("Update Profile?")
                         .setMessage("Are you sure you want to update the changes???")
@@ -470,6 +584,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
                                 Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
                                 profile_page_save_changes_permanantly.setVisibility(View.GONE);
+
                             }
 
 
@@ -484,6 +599,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
                             }
                         })
                         .show();
+
 
             }
         });

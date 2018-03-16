@@ -16,12 +16,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.upitt.ruc.activities.LoaderActivity;
 
 public class Landing_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,BackgroundHelper.AsyncResponse{
 
     private SignInButton signin;
     static private GoogleApiClient googleApiClient;
     String memail;
+    String imgURL;
     String mfamilyName;
     String mgivenName;
 
@@ -74,7 +76,7 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             GoogleSignInAccount account = googleSignInResult.getSignInAccount();
 
             memail = account.getEmail();
-            //String imgURL = account.getPhotoUrl().toString();
+            //imgURL = account.getPhotoUrl().toString();
             mfamilyName = account.getFamilyName();
             mgivenName = account.getGivenName();
 
@@ -103,6 +105,9 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void processFinish(String output) {
 
+        ((AppCompatActivity) LoaderActivity.loader_Activity).finish();
+        //LoaderActivity.this.getApplicationContext().finish();
+
         if(output.equals("user does not exist"))
         {
             Log.i("Test","Here");
@@ -115,8 +120,10 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
         }
         else
         {
-            Intent intent = new Intent(Landing_Activity.this,Home.class);
+            Intent intent = new Intent(Landing_Activity.this, MainActivity.class);
             intent.putExtra("email",memail);
+            intent.putExtra("imgURL", imgURL);
+            intent.putExtra("mgivenName", mgivenName);
             Log.i("Test","Here");
             startActivity(intent);
             finish();
@@ -134,5 +141,6 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
 
 }

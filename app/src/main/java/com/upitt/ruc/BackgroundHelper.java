@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+
+import com.upitt.ruc.activities.LoaderActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,8 +28,9 @@ public class BackgroundHelper extends AsyncTask<String,Void,String>{
 
     Context context;
     public AsyncResponse delegate = null;
+    Context context_loader;
 
-    public BackgroundHelper(Context contex,AsyncResponse delegate)
+    public BackgroundHelper(Context context, AsyncResponse delegate)
     {
         this.context = context;
         this.delegate = delegate;
@@ -199,11 +203,16 @@ public class BackgroundHelper extends AsyncTask<String,Void,String>{
     @Override
     protected void onPreExecute() {
 
+        Intent intent = new Intent(context.getApplicationContext(), LoaderActivity.class);
+        context_loader = LoaderActivity.loader_Activity;
+        context.startActivity(intent);
+
     }
 
     @Override
     protected void onPostExecute(String result)
     {
+        ((AppCompatActivity) context_loader).finish();
         delegate.processFinish(result);
     }
 

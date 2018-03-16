@@ -12,6 +12,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String url;
+    public static String mname;
+
     @BindView(R.id.activity_main_viewPager)
     ViewPager mainViewPager;
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        url = getIntent().getStringExtra("imgURL");
+        mname = getIntent().getStringExtra("mgivenName");
         MainActivityViewPagerAdapter adapter = new MainActivityViewPagerAdapter(getSupportFragmentManager());
 
         mainViewPager.setAdapter(adapter);

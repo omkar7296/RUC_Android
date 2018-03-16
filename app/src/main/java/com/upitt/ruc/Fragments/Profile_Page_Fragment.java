@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.upitt.ruc.Entities.Profile;
+import com.upitt.ruc.MainActivity;
 import com.upitt.ruc.R;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ import butterknife.ButterKnife;
  */
 
 public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
+
+    String url = MainActivity.url;
+    String mname = MainActivity.mname;
 
     private Context mcontext;
     private Profile profile;
@@ -177,8 +181,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
         ButterKnife.bind(this, rootView);
 
         //Here make the async call
-        profile = new Profile("Omkar Sawant",
-                "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339",
+        profile = new Profile(mname,
+                //"https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339",
+                url,
                 "Pittsburgh",
                 "5 years",
                 "96",

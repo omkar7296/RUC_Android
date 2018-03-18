@@ -82,6 +82,30 @@ public class News_Feed_Fragment extends Fragment {
                 "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339"
         ));
 
+        posts.add(new Post(3,
+                "Here is a sample description",
+                "text_video",
+                "http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
+                2,
+                30,
+                40,
+                "Omkar Sawant",
+                "Pittsburgh",
+                "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339"
+        ));
+
+        posts.add(new Post(3,
+                "Here is a sample description",
+                "text_video",
+                "http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
+                2,
+                30,
+                40,
+                "Omkar Sawant",
+                "Pittsburgh",
+                "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339"
+        ));
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         posts_recyclerView.setLayoutManager(linearLayoutManager);

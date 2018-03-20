@@ -47,7 +47,7 @@ public class BackgroundHelper extends AsyncTask<String,Void,String>{
         {
             try {
 
-                String loginURL = "http://testomkar.000webhostapp.com/verify.php";
+                String loginURL = "http://atown.dreamhosters.com/ruc/android/checkforuser.php";
 
                 String email = params[1];
 

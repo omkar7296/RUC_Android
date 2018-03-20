@@ -41,7 +41,6 @@
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:padding="3dp"
-                            android:src="@drawable/jamesharden"
 
                             />
 
@@ -56,7 +55,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Omkar Sawant"
                                 android:textColor="#000000"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -85,7 +83,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:gravity="center"
-                                android:text="Pittsburgh"
                                 android:textColor="#000000"
                                 android:textSize="16sp" />
 
@@ -143,7 +140,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
-                                        android:text="5 years"
                                         android:textColor="@color/black"
                                         android:textSize="16sp"
                                         android:textStyle="italic"
@@ -203,7 +199,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="3dp"
-                                    android:text="96"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="20sp"
                                     android:textStyle="bold" />
@@ -263,22 +258,19 @@
                             android:id="@+id/profile_page_badge1_imageView"
                             android:layout_width="0dp"
                             android:layout_height="120dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/badge" />
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:id="@+id/profile_page_badge2_imageView"
                             android:layout_width="0dp"
                             android:layout_height="120dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/badge" />
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:id="@+id/profile_page_badge3_imageView"
                             android:layout_width="0dp"
                             android:layout_height="120dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/badge" />
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -328,7 +320,6 @@
                             android:id="@+id/profile_page_aboutMe_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hello, this is a test description about me. I am agood at lot of things.Hello, this is atest description about me. I am agood at lot of things."
                             android:textColor="@color/black" />
 
                         <EditText
@@ -418,7 +409,6 @@
                             android:id="@+id/profile_page_sports_activities_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Football \nBasketball\nBaseball"
                             android:textColor="@color/black" />
 
                         <EditText
@@ -495,7 +485,6 @@
                             android:id="@+id/profile_page_hobbies_interests_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Swimming \nReading Mystery Novels"
                             android:textColor="@color/black" />
 
                         <EditText
@@ -572,7 +561,6 @@
                             android:id="@+id/profile_page_places_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Test place 1\nTest place 2"
                             android:textColor="@color/black" />
 
                         <EditText

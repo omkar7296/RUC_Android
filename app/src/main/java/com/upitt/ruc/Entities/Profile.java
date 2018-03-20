@@ -8,6 +8,7 @@ public class Profile {
     ////////// should be singleton
 
     private String name;
+    private String email;
     private String profile_pic_url;
     private String location;
     private String lived;
@@ -20,7 +21,8 @@ public class Profile {
     private String hobbies_interests;
     private String places;
 
-    public Profile(String name, String profile_pic_url, String location, String lived, String points, String badge1_url, String badge2_url, String badge3_url, String about_me, String sports_activities, String hobbies_interests, String places) {
+
+    public Profile(String name, String profile_pic_url, String location, String lived, String points, String badge1_url, String badge2_url, String badge3_url, String about_me, String sports_activities, String hobbies_interests, String places, String email) {
         this.name = name;
         this.profile_pic_url = profile_pic_url;
         this.location = location;
@@ -33,6 +35,16 @@ public class Profile {
         this.sports_activities = sports_activities;
         this.hobbies_interests = hobbies_interests;
         this.places = places;
+        this.email = email;
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {

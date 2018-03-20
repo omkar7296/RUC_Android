@@ -22,8 +22,9 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
     private SignInButton signin;
     static private GoogleApiClient googleApiClient;
     String memail;
-    String mfamilyName;
-    String mgivenName;
+    String mImgURL;
+    //String mfamilyName;
+    String mdisplayName;
 
     public static GoogleApiClient getGoogleApiClient() {
         return googleApiClient;
@@ -74,9 +75,9 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             GoogleSignInAccount account = googleSignInResult.getSignInAccount();
 
             memail = account.getEmail();
-            //String imgURL = account.getPhotoUrl().toString();
-            mfamilyName = account.getFamilyName();
-            mgivenName = account.getGivenName();
+            mImgURL = account.getPhotoUrl().toString();
+            //mfamilyName = account.getFamilyName();
+            mdisplayName = account.getGivenName();
 
             String type = "check_user_account";
 
@@ -103,24 +104,26 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void processFinish(String output) {
 
-        if(output.equals("user does not exist"))
+        Log.i("Test", output);
+        if (output.equals("usernotpresent"))
         {
-            Log.i("Test","Here");
+            Log.i("Test", output);
             Intent intent = new Intent(Landing_Activity.this,Reg_Code.class);
             intent.putExtra("email",memail);
-            intent.putExtra("familyName",mfamilyName);
-            intent.putExtra("givenName",mgivenName);
+            intent.putExtra("displayName", mdisplayName);
+            intent.putExtra("ImgURL", mImgURL);
+
             startActivity(intent);
             finish();
-        }
-        else
-        {
+        } else if (output.equals("userpresent")) {
             Intent intent = new Intent(Landing_Activity.this,Home.class);
             intent.putExtra("email",memail);
             Log.i("Test","Here");
             startActivity(intent);
             finish();
 
+        } else {
+            Toast.makeText(this, "Service Temporarily down", Toast.LENGTH_SHORT).show();
         }
     }
 

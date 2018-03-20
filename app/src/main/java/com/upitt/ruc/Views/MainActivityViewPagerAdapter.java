@@ -1,6 +1,8 @@
 package com.upitt.ruc.Views;
 
 
+import android.os.Bundle;
+import android.support.v4.app.BundleCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,6 +18,12 @@ import com.upitt.ruc.Fragments.Profile_Page_Fragment;
 
 public class MainActivityViewPagerAdapter extends FragmentStatePagerAdapter {
 
+    String email;
+
+    public MainActivityViewPagerAdapter(FragmentManager fm, String email) {
+        super(fm);
+        this.email = email;
+    }
 
     public MainActivityViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,9 +34,13 @@ public class MainActivityViewPagerAdapter extends FragmentStatePagerAdapter {
 
         Fragment returnFragment;
 
+        Bundle bundle = new Bundle();
+        bundle.putString("email", email);
+
         switch(position)
         {
             case 0: returnFragment = Profile_Page_Fragment.newInstance();
+                returnFragment.setArguments(bundle);
                 break;
             case 1: returnFragment = News_Feed_Fragment.newInstance();
                 break;

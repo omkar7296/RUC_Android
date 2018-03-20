@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        MainActivityViewPagerAdapter adapter = new MainActivityViewPagerAdapter(getSupportFragmentManager());
+        //String email = getIntent().getStringExtra("memail");
+        String email = "Test";
+
+        MainActivityViewPagerAdapter adapter = new MainActivityViewPagerAdapter(getSupportFragmentManager(), email);
 
         mainViewPager.setAdapter(adapter);
 

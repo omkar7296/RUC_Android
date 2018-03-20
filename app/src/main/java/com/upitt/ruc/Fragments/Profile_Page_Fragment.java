@@ -23,8 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.upitt.ruc.AsyncTasks.Get_Profile_Info;
+import com.upitt.ruc.AsyncTasks.Update_Profile_Info;
 import com.upitt.ruc.Entities.Profile;
 import com.upitt.ruc.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +40,15 @@ import butterknife.ButterKnife;
  * Created by omkar on 3/9/2018.
  */
 
-public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
+public class Profile_Page_Fragment extends android.support.v4.app.Fragment implements Get_Profile_Info.Get_Profile_Info_AsyncResponse, Update_Profile_Info.Update_Profile_Info_AsyncResponse {
 
     private Context mcontext;
     private Profile profile;
     private List<String> locations_list;
     private List<String> lived_years_list;
+
+    private String email;
+
 
     private String mlocation_spinner_item_selected;
     private String mlived_years_item_selected;
@@ -176,20 +183,29 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
 
         ButterKnife.bind(this, rootView);
 
+        Bundle bundle = getArguments();
+        email = bundle.getString("email");
+
+        email = "pratikthakkar11@gmail.com";
+
+        Get_Profile_Info get_profile_info = new Get_Profile_Info(mcontext, Profile_Page_Fragment.this);
+        get_profile_info.execute(email);
+
+
         //Here make the async call
-        profile = new Profile("Omkar Sawant",
-                "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339",
-                "Pittsburgh",
-                "5 years",
-                "96",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
-                "Hello, this is a test description about me. I am agood at lot of things.Hello, this is a test description about me. I am agood at lot of things.",
-                "Football \nBasketball\nBaseball",
-                "Swimming \nReading Mystery Novels",
-                "Test place 1\nTest place 2"
-                );
+//        profile = new Profile("Omkar Sawant",
+//                "https://s3.amazonaws.com/plonlinecontent/online/ronaldo7-1489414339",
+//                "Pittsburgh",
+//                "5 years",
+//                "96",
+//                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+//                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+//                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+//                "Hello, this is a test description about me. I am agood at lot of things.Hello, this is a test description about me. I am agood at lot of things.",
+//                "Football \nBasketball\nBaseball",
+//                "Swimming \nReading Mystery Novels",
+//                "Test place 1\nTest place 2"
+//                );
 
         // Spinner Drop down elements
         locations_list = new ArrayList<String>();
@@ -253,20 +269,20 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
             }
         });
 
-        profile_page_name_textView.setText(profile.getName());
-        profile_page_location_textView.setText(profile.getLocation());
-        profile_page_lived_textView.setText(profile.getLived());
-        profile_page_points_textView.setText(profile.getPoints());
-
-        profile_page_aboutMe_textView.setText(profile.getAbout_me());
-        profile_page_sports_activities_textView.setText(profile.getSports_activities());
-        profile_page_hobbies_interests_textView.setText(profile.getHobbies_interests());
-        profile_page_places_textView.setText(profile.getPlaces());
-
-        Glide.with(this).load(profile.getProfile_pic_url()).into(profile_page_profile_pic);
-        Glide.with(this).load(profile.getBadge1_url()).into(profile_page_badge1_imageView);
-        Glide.with(this).load(profile.getBadge2_url()).into(profile_page_badge2_imageView);
-        Glide.with(this).load(profile.getBadge3_url()).into(profile_page_badge3_imageView);
+//        profile_page_name_textView.setText(profile.getName());
+//        profile_page_location_textView.setText(profile.getLocation());
+//        profile_page_lived_textView.setText(profile.getLived());
+//        profile_page_points_textView.setText(profile.getPoints());
+//
+//        profile_page_aboutMe_textView.setText(profile.getAbout_me());
+//        profile_page_sports_activities_textView.setText(profile.getSports_activities());
+//        profile_page_hobbies_interests_textView.setText(profile.getHobbies_interests());
+//        profile_page_places_textView.setText(profile.getPlaces());
+//
+//        Glide.with(this).load(profile.getProfile_pic_url()).into(profile_page_profile_pic);
+//        Glide.with(this).load(profile.getBadge1_url()).into(profile_page_badge1_imageView);
+//        Glide.with(this).load(profile.getBadge2_url()).into(profile_page_badge2_imageView);
+//        Glide.with(this).load(profile.getBadge3_url()).into(profile_page_badge3_imageView);
 
 
         profile_page_header_cardView.setOnClickListener(new View.OnClickListener() {
@@ -308,8 +324,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
         profile_page_aboutMe_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(!b)
-                {
+                if(!b) {
                     profile_page_aboutMe_save.setVisibility(View.INVISIBLE);
                     profile_page_aboutMe_edit.setVisibility(View.VISIBLE);
 
@@ -338,7 +353,6 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
                 profile_page_save_changes_permanantly.setVisibility(View.VISIBLE);
             }
         });
-
 
 
         //
@@ -582,18 +596,19 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                                Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                                profile_page_save_changes_permanantly.setVisibility(View.GONE);
+                                Update_Profile_Info update_profile_info = new Update_Profile_Info(mcontext, Profile_Page_Fragment.this);
+                                update_profile_info.execute(profile);
+
+                                //Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                                //profile_page_save_changes_permanantly.setVisibility(View.GONE);
 
                             }
-
 
 
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
 
 
                             }
@@ -605,13 +620,82 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment {
         });
 
 
-
-
-
-
-
-
         return rootView;
+
+    }
+
+
+    @Override
+    public void processFinish(String about_me, String sports_activities, String hobbies_interests, String places, String location, String lived_since) {
+
+        //check for nulls
+        if (location == "null") {
+            location = "Please select";
+        }
+        if (lived_since == "null") {
+            lived_since = "Please Select";
+        }
+        if (about_me == "null") {
+            about_me = "Please add Something about you";
+        }
+        if (sports_activities == "null") {
+            sports_activities = "Please add your favorite sports and activities";
+        }
+        if (hobbies_interests == "null") {
+            hobbies_interests = "Please add your favorite hobbies and interests";
+        }
+        if (places == "null") {
+            places = "Please add your favorite places";
+        }
+
+
+        profile = new Profile("Pratik Thakkar",
+                "https://lh4.googleusercontent.com/-dd9bIo_vESA/AAAAAAAAAAI/AAAAAAAAAE8/YUcVG9vFvXw/photo.jpg",
+                location,
+                lived_since,
+                "96",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
+                about_me,
+                sports_activities,
+                hobbies_interests,
+                places,
+                email
+        );
+
+        updateUI(profile);
+    }
+
+    public void updateUI(Profile profile) {
+        profile_page_name_textView.setText(profile.getName());
+        profile_page_location_textView.setText(profile.getLocation());
+        profile_page_lived_textView.setText(profile.getLived());
+        profile_page_points_textView.setText(profile.getPoints());
+
+        profile_page_aboutMe_textView.setText(profile.getAbout_me());
+        profile_page_sports_activities_textView.setText(profile.getSports_activities());
+        profile_page_hobbies_interests_textView.setText(profile.getHobbies_interests());
+        profile_page_places_textView.setText(profile.getPlaces());
+
+        Glide.with(this).load(profile.getProfile_pic_url()).into(profile_page_profile_pic);
+        Glide.with(this).load(profile.getBadge1_url()).into(profile_page_badge1_imageView);
+        Glide.with(this).load(profile.getBadge2_url()).into(profile_page_badge2_imageView);
+        Glide.with(this).load(profile.getBadge3_url()).into(profile_page_badge3_imageView);
+
+    }
+
+    @Override
+    public void updateFinish(String output) {
+
+        if (output.equals("success")) {
+            Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+            profile_page_save_changes_permanantly.setVisibility(View.GONE);
+        } else if (output.equals("failed")) ;
+        {
+            Toast.makeText(mcontext, "Profile update failed. Please try again", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }

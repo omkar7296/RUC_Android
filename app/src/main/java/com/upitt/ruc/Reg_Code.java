@@ -8,16 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.upitt.ruc.AsyncTasks.Reg_Code_Validation;
 
 import java.io.BufferedReader;
 
-public class Reg_Code extends AppCompatActivity implements BackgroundHelper.AsyncResponse {
+public class Reg_Code extends AppCompatActivity implements Reg_Code_Validation.Reg_Code_Validation_AsyncResponse {
 
     String orig_reg_code = "test";
     EditText editText;
     Button submit;
     TextView textView;
     String memail;
+    String mdisplayName;
+    String mImgURL;
     TextView no_code;
 
     @Override
@@ -36,7 +41,7 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
             public void onClick(View view) {
                 Intent intent = new Intent(Reg_Code.this,No_Reg_Code.class);
                 intent.putExtra("email",getIntent().getStringExtra("email"));
-                intent.putExtra("givenName",getIntent().getStringExtra("givenName"));
+                intent.putExtra("displayName", getIntent().getStringExtra("displayName"));
                 startActivity(intent);
                 finish();
             }
@@ -48,20 +53,14 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
 
                 String reg_code = editText.getText().toString();
 
-                if(reg_code.equals(orig_reg_code))
-                {
-                    String type = "insert_user_account";
-                    memail = getIntent().getStringExtra("email");
-                    BackgroundHelper backGroundHelper = new BackgroundHelper(getApplicationContext(),Reg_Code.this);
-                    backGroundHelper.execute(type,memail);
-                }
-                else
-                {
-                    textView.setText("Please check your Registration code!!");
-                    textView.setVisibility(View.VISIBLE);
-                    editText.getText().clear();
-                    Landing_Activity.hideKeyboard(Reg_Code.this);
-                }
+                memail = getIntent().getStringExtra("email");
+                mImgURL = getIntent().getStringExtra("ImgURL");
+                mdisplayName = getIntent().getStringExtra("displayName");
+
+                Reg_Code_Validation reg_code_validation = new Reg_Code_Validation(getApplicationContext(), Reg_Code.this);
+                reg_code_validation.execute(memail, mImgURL, mdisplayName, reg_code);
+
+
 
             }
         });
@@ -71,16 +70,20 @@ public class Reg_Code extends AppCompatActivity implements BackgroundHelper.Asyn
     @Override
     public void processFinish(String output) {
 
-        if(output.equals("user inserted successfully"))
+        Log.i("Test", output);
+        if (output.equals("accountcreated"))
         {
             Intent intent = new Intent(Reg_Code.this,Home.class);
             intent.putExtra("email",memail);
             //Log.i("Test","Here");
             startActivity(intent);
-        }
-        else
-        {
-
+        } else if (output.equals("codeerror")) {
+            textView.setText("Please check your Registration code!!");
+            textView.setVisibility(View.VISIBLE);
+            editText.getText().clear();
+            Landing_Activity.hideKeyboard(Reg_Code.this);
+        } else {
+            Toast.makeText(this, "Service Temporarily down", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -3,17 +3,20 @@ package com.upitt.ruc;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class No_Reg_Code extends AppCompatActivity implements BackgroundHelper.AsyncResponse{
+import com.upitt.ruc.AsyncTasks.Reg_code_Request_Insert;
+
+public class No_Reg_Code extends AppCompatActivity implements Reg_code_Request_Insert.Reg_code_Request_Insert_AsyncResponse {
 
     EditText phone_no;
     Button submit;
     String mphone;
     String memail;
-    String mgivenName;
+    String mdisplayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,7 @@ public class No_Reg_Code extends AppCompatActivity implements BackgroundHelper.A
         submit = (Button)findViewById(R.id.contact_no_submit);
 
         memail = getIntent().getStringExtra("email");
-        mgivenName = getIntent().getStringExtra("givenName");
+        mdisplayName = getIntent().getStringExtra("displayName");
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,8 +35,8 @@ public class No_Reg_Code extends AppCompatActivity implements BackgroundHelper.A
 
                 mphone = phone_no.getText().toString();
                 String type = "insert_reg_code_request";
-                BackgroundHelper backGroundHelper = new BackgroundHelper(getApplicationContext(),No_Reg_Code.this);
-                backGroundHelper.execute(type,memail,mgivenName,mphone);
+                Reg_code_Request_Insert reg_code_request_insert = new Reg_code_Request_Insert(getApplicationContext(), No_Reg_Code.this);
+                reg_code_request_insert.execute(type, memail, mdisplayName, mphone);
             }
         });
 
@@ -45,7 +48,8 @@ public class No_Reg_Code extends AppCompatActivity implements BackgroundHelper.A
     @Override
     public void processFinish(String output) {
 
-        if(output.equals("user inserted successfully"))
+        Log.i("output", output);
+        if (output.equals("requestsent"))
         {
             Intent intent = new Intent(No_Reg_Code.this,Reg_Code_Req_Received.class);
             //Log.i("Test","Here");
@@ -53,7 +57,7 @@ public class No_Reg_Code extends AppCompatActivity implements BackgroundHelper.A
         }
         else
         {
-
+            Log.i("TEst", "Hahaha");
         }
     }
 }

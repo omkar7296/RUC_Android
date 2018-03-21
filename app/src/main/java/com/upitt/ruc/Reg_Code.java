@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,10 @@ import com.upitt.ruc.AsyncTasks.Reg_Code_Validation;
 import java.io.BufferedReader;
 
 public class Reg_Code extends AppCompatActivity implements Reg_Code_Validation.Reg_Code_Validation_AsyncResponse {
+
+
+    LinearLayout activity_reg_code_parentLayout;
+    ProgressBar activity_reg_code_progressbar;
 
     String orig_reg_code = "test";
     EditText editText;
@@ -34,6 +40,8 @@ public class Reg_Code extends AppCompatActivity implements Reg_Code_Validation.R
         submit = (Button)findViewById(R.id.reg_code_submit);
         textView = (TextView)findViewById(R.id.reg_code_message);
         no_code = (TextView)findViewById(R.id.no_code);
+        activity_reg_code_parentLayout = (LinearLayout) findViewById(R.id.activity_reg_code_parentLayout);
+        activity_reg_code_progressbar = (ProgressBar) findViewById(R.id.activity_reg_code_progressbar);
 
 
         no_code.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +65,7 @@ public class Reg_Code extends AppCompatActivity implements Reg_Code_Validation.R
                 mImgURL = getIntent().getStringExtra("ImgURL");
                 mdisplayName = getIntent().getStringExtra("displayName");
 
-                Reg_Code_Validation reg_code_validation = new Reg_Code_Validation(getApplicationContext(), Reg_Code.this);
+                Reg_Code_Validation reg_code_validation = new Reg_Code_Validation(getApplicationContext(), Reg_Code.this, activity_reg_code_parentLayout, activity_reg_code_progressbar);
                 reg_code_validation.execute(memail, mImgURL, mdisplayName, reg_code);
 
 

@@ -2,6 +2,9 @@ package com.upitt.ruc.AsyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.upitt.ruc.Entities.Profile;
 
@@ -25,10 +28,14 @@ public class Update_Profile_Info extends AsyncTask<Profile, Void, String> {
 
     Context context;
     Update_Profile_Info_AsyncResponse delegate = null;
+    private RelativeLayout fragment_profile_page_parentLayout;
+    private ProgressBar fragment_profile_page_progressbar;
 
-    public Update_Profile_Info(Context context, Update_Profile_Info_AsyncResponse delegate) {
+    public Update_Profile_Info(Context context, Update_Profile_Info_AsyncResponse delegate, RelativeLayout fragment_profile_page_parentLayout, ProgressBar fragment_profile_page_progressbar) {
         this.context = context;
         this.delegate = delegate;
+        this.fragment_profile_page_parentLayout = fragment_profile_page_parentLayout;
+        this.fragment_profile_page_progressbar = fragment_profile_page_progressbar;
     }
 
     public interface Update_Profile_Info_AsyncResponse {
@@ -106,11 +113,14 @@ public class Update_Profile_Info extends AsyncTask<Profile, Void, String> {
 
     @Override
     protected void onPreExecute() {
-
+        fragment_profile_page_parentLayout.setVisibility(View.GONE);
+        fragment_profile_page_progressbar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(String result) {
+        fragment_profile_page_progressbar.setVisibility(View.GONE);
+        fragment_profile_page_parentLayout.setVisibility(View.VISIBLE);
         delegate.updateFinish(result);
     }
 }

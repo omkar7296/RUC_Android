@@ -2,6 +2,9 @@ package com.upitt.ruc.AsyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.upitt.ruc.BackgroundHelper;
 
@@ -26,10 +29,14 @@ public class Reg_code_Request_Insert extends AsyncTask<String, Void, String> {
 
     Context context;
     public Reg_code_Request_Insert_AsyncResponse delegate = null;
+    LinearLayout activity_no_reg_code_parentLayout;
+    ProgressBar activity_no_reg_code_progressbar;
 
-    public Reg_code_Request_Insert(Context context, Reg_code_Request_Insert_AsyncResponse delegate) {
+    public Reg_code_Request_Insert(Context context, Reg_code_Request_Insert_AsyncResponse delegate, LinearLayout activity_no_reg_code_parentLayout, ProgressBar activity_no_reg_code_progressbar) {
         this.context = context;
         this.delegate = delegate;
+        this.activity_no_reg_code_parentLayout = activity_no_reg_code_parentLayout;
+        this.activity_no_reg_code_progressbar = activity_no_reg_code_progressbar;
     }
 
     public interface Reg_code_Request_Insert_AsyncResponse {
@@ -95,10 +102,15 @@ public class Reg_code_Request_Insert extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
 
+        activity_no_reg_code_parentLayout.setVisibility(View.GONE);
+        activity_no_reg_code_progressbar.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     protected void onPostExecute(String result) {
+        activity_no_reg_code_progressbar.setVisibility(View.GONE);
+        activity_no_reg_code_parentLayout.setVisibility(View.VISIBLE);
         delegate.processFinish(result);
     }
 }

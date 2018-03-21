@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -17,6 +19,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import butterknife.BindView;
+
 public class Landing_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,BackgroundHelper.AsyncResponse{
 
     private SignInButton signin;
@@ -25,6 +29,10 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
     String mImgURL;
     //String mfamilyName;
     String mdisplayName;
+
+
+    LinearLayout landing_activity_parent_layout;
+    ProgressBar landing_activity_progressbar;
 
     public static GoogleApiClient getGoogleApiClient() {
         return googleApiClient;
@@ -37,6 +45,8 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_);
 
+        landing_activity_progressbar = (ProgressBar) findViewById(R.id.landing_activity_progressbar);
+        landing_activity_parent_layout = (LinearLayout) findViewById(R.id.landing_activity_parent_layout);
         signin = (SignInButton)findViewById(R.id.login);
 
 
@@ -75,13 +85,19 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             GoogleSignInAccount account = googleSignInResult.getSignInAccount();
 
             memail = account.getEmail();
-            mImgURL = account.getPhotoUrl().toString();
+
+
+            if (account.getPhotoUrl() == null) {
+                mImgURL = "https://worldarts2015.s3-us-west-2.amazonaws.com/images/default-profile-picture.jpg?cache=1473463677";
+            } else {
+                mImgURL = account.getPhotoUrl().toString();
+            }
             //mfamilyName = account.getFamilyName();
             mdisplayName = account.getGivenName();
 
             String type = "check_user_account";
 
-            BackgroundHelper backGroundHelper = new BackgroundHelper(Landing_Activity.this,this);
+            BackgroundHelper backGroundHelper = new BackgroundHelper(Landing_Activity.this, this, landing_activity_parent_layout, landing_activity_progressbar);
             backGroundHelper.execute(type,memail);
 
 
@@ -116,7 +132,7 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             startActivity(intent);
             finish();
         } else if (output.equals("userpresent")) {
-            Intent intent = new Intent(Landing_Activity.this,Home.class);
+            Intent intent = new Intent(Landing_Activity.this, MainActivity.class);
             intent.putExtra("email",memail);
             Log.i("Test","Here");
             startActivity(intent);

@@ -2,6 +2,11 @@ package com.upitt.ruc.AsyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import com.upitt.ruc.Reg_Code;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,10 +29,15 @@ public class Reg_Code_Validation extends AsyncTask<String, Void, String> {
 
     Context context;
     public Reg_Code_Validation_AsyncResponse delegate = null;
+    private LinearLayout activity_reg_code_parentLayout;
+    ;
+    private ProgressBar activity_reg_code_progressbar;
 
-    public Reg_Code_Validation(Context context, Reg_Code_Validation_AsyncResponse delegate) {
+    public Reg_Code_Validation(Context context, Reg_Code_Validation_AsyncResponse delegate, LinearLayout activity_reg_code_parentLayout, ProgressBar activity_reg_code_progressbar) {
         this.context = context;
         this.delegate = delegate;
+        this.activity_reg_code_parentLayout = activity_reg_code_parentLayout;
+        this.activity_reg_code_progressbar = activity_reg_code_progressbar;
     }
 
     public interface Reg_Code_Validation_AsyncResponse {
@@ -96,10 +106,17 @@ public class Reg_Code_Validation extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
 
+        activity_reg_code_parentLayout.setVisibility(View.GONE);
+        activity_reg_code_progressbar.setVisibility(View.VISIBLE);
+
+
     }
 
     @Override
     protected void onPostExecute(String result) {
+
+        activity_reg_code_progressbar.setVisibility(View.GONE);
+        activity_reg_code_parentLayout.setVisibility(View.VISIBLE);
         delegate.processFinish(result);
     }
 }

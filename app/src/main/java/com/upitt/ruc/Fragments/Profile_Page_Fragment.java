@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -46,7 +49,8 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
     private Profile profile;
     private List<String> locations_list;
     private List<String> lived_years_list;
-
+    private RelativeLayout fragment_profile_page_parentLayout;
+    private ProgressBar fragment_profile_page_progressbar;
     private String email;
 
 
@@ -181,14 +185,19 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
         final View rootView = inflater.inflate(R.layout.fragment_profile_page, container, false);
         mcontext = rootView.getContext();
 
+        fragment_profile_page_parentLayout = (RelativeLayout) rootView.findViewById(R.id.fragment_profile_page_parentLayout);
+        fragment_profile_page_progressbar = (ProgressBar) rootView.findViewById(R.id.fragment_profile_page_progressbar);
+
         ButterKnife.bind(this, rootView);
 
         Bundle bundle = getArguments();
         email = bundle.getString("email");
 
-        email = "pratikthakkar11@gmail.com";
+        //Log.i("Email",email);
 
-        Get_Profile_Info get_profile_info = new Get_Profile_Info(mcontext, Profile_Page_Fragment.this);
+        //email = "pratikthakkar11@gmail.com";
+
+        Get_Profile_Info get_profile_info = new Get_Profile_Info(mcontext, Profile_Page_Fragment.this, fragment_profile_page_parentLayout, fragment_profile_page_progressbar);
         get_profile_info.execute(email);
 
 
@@ -596,7 +605,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                                Update_Profile_Info update_profile_info = new Update_Profile_Info(mcontext, Profile_Page_Fragment.this);
+                                Update_Profile_Info update_profile_info = new Update_Profile_Info(mcontext, Profile_Page_Fragment.this, fragment_profile_page_parentLayout, fragment_profile_page_progressbar);
                                 update_profile_info.execute(profile);
 
                                 //Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
@@ -626,7 +635,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
 
 
     @Override
-    public void processFinish(String about_me, String sports_activities, String hobbies_interests, String places, String location, String lived_since) {
+    public void processFinish(String about_me, String sports_activities, String hobbies_interests, String places, String location, String lived_since, String name, String photo, String points) {
 
         //check for nulls
         if (location == "null") {
@@ -649,11 +658,11 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
         }
 
 
-        profile = new Profile("Pratik Thakkar",
-                "https://lh4.googleusercontent.com/-dd9bIo_vESA/AAAAAAAAAAI/AAAAAAAAAE8/YUcVG9vFvXw/photo.jpg",
+        profile = new Profile(name,
+                photo,
                 location,
                 lived_since,
-                "96",
+                points,
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74QOys_CZy3Gvwn8J41L6lmpUH7leOq9kO3eC5A_amPsJpyo1",
@@ -665,6 +674,11 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
         );
 
         updateUI(profile);
+    }
+
+    @Override
+    public void processFailed(String result) {
+        Toast.makeText(getContext(), "Server Temporary down. Please try again in sometime", Toast.LENGTH_SHORT).show();
     }
 
     public void updateUI(Profile profile) {

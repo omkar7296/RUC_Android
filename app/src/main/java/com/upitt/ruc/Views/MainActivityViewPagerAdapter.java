@@ -6,6 +6,7 @@ import android.support.v4.app.BundleCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.upitt.ruc.Fragments.Events_Fragment;
 import com.upitt.ruc.Fragments.Messaging_Fragment;
@@ -36,6 +37,8 @@ public class MainActivityViewPagerAdapter extends FragmentStatePagerAdapter {
 
         Bundle bundle = new Bundle();
         bundle.putString("email", email);
+
+        //Log.i("EMail m:",email);
 
         switch(position)
         {

@@ -1,207 +1,226 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/fragment_profile_page_progressbar"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/profile_page_save_changes_permanantly">
+        android:id="@+id/fragment_profile_page_parentLayout">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_above="@id/profile_page_save_changes_permanantly">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_header_cardView"
-                android:focusableInTouchMode="true"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_header_cardView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="3dp">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-
-                        <ImageView
-                            android:id="@+id/profile_page_profile_pic"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:padding="3dp"
-
-                            />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                            android:orientation="horizontal"
+                            android:padding="3dp">
 
-                            <TextView
-                                android:id="@+id/profile_page_name_textView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp">
+                            <ImageView
+                                android:id="@+id/profile_page_profile_pic"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:padding="3dp"
 
-                                <Spinner
-                                    android:id="@+id/profile_page_location_spinner"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:visibility="gone"
-
-                                    >
-
-                                </Spinner>
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:id="@+id/profile_page_location_textView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:gravity="center"
-                                android:textColor="#000000"
-                                android:textSize="16sp" />
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:id="@+id/profile_page_location_edit"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_centerInParent="true"
-                                    android:src="@mipmap/edit" />
-
-                                <ImageView
-                                    android:id="@+id/profile_page_location_save"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_centerInParent="true"
-                                    android:src="@mipmap/save"
-                                    android:visibility="invisible" />
-
-                            </RelativeLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/colorPrimary" />
-
-                            <TextView
-                                android:id="@+id/lived_textView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="10dp"
-                                android:text="I have lived here for:"
-                                android:textColor="#000000"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                />
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:id="@+id/profile_page_name_textView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="#000000"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
 
                                 <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <TextView
-                                        android:id="@+id/profile_page_lived_textView"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
-                                        android:textColor="@color/black"
-                                        android:textSize="16sp"
-                                        android:textStyle="italic"
-                                        />
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp">
 
                                     <Spinner
-                                        android:id="@+id/profile_page_lived_spinner"
+                                        android:id="@+id/profile_page_location_spinner"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
                                         android:visibility="gone"
 
-                                        ></Spinner>
+                                        >
 
+                                    </Spinner>
 
                                 </RelativeLayout>
 
-                                <ImageView
-                                    android:id="@+id/profile_page_lived_edit"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="5dp"
-                                    android:src="@mipmap/edit"
-                                    />
-
-
-                                <ImageView
-                                    android:id="@+id/profile_page_lived_save"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="5dp"
-                                    android:src="@mipmap/save"
-                                    android:visibility="invisible" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
                                 <TextView
-                                    android:id="@+id/points_textView1"
-                                    android:layout_width="wrap_content"
+                                    android:id="@+id/profile_page_location_textView"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
                                     android:layout_marginTop="3dp"
-                                    android:text="Points: "
+                                    android:gravity="center"
                                     android:textColor="#000000"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="16sp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:id="@+id/profile_page_location_edit"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_centerInParent="true"
+                                        android:src="@mipmap/edit" />
+
+                                    <ImageView
+                                        android:id="@+id/profile_page_location_save"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_centerInParent="true"
+                                        android:src="@mipmap/save"
+                                        android:visibility="invisible" />
+
+                                </RelativeLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@color/colorPrimary" />
 
                                 <TextView
-                                    android:id="@+id/profile_page_points_textView"
+                                    android:id="@+id/lived_textView"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
-                                    android:layout_marginTop="3dp"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="20sp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="I have lived here for:"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/profile_page_lived_textView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:textColor="@color/black"
+                                            android:textSize="16sp"
+                                            android:textStyle="italic" />
+
+                                        <Spinner
+                                            android:id="@+id/profile_page_lived_spinner"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="gone"
+
+                                            ></Spinner>
+
+
+                                    </RelativeLayout>
+
+                                    <ImageView
+                                        android:id="@+id/profile_page_lived_edit"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@mipmap/edit" />
+
+
+                                    <ImageView
+                                        android:id="@+id/profile_page_lived_save"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@mipmap/save"
+                                        android:visibility="invisible" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/points_textView1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="3dp"
+                                        android:text="Points: "
+                                        android:textColor="#000000"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/profile_page_points_textView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="3dp"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
 
                             </LinearLayout>
 
@@ -211,408 +230,405 @@
 
                     </LinearLayout>
 
+                </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_badges_cardView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
-
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_badges_cardView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Badges"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorPrimary" />
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/profile_page_badge1_imageView"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_weight="1" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Badges"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/profile_page_badge2_imageView"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_weight="1" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimary" />
 
-                        <ImageView
-                            android:id="@+id/profile_page_badge3_imageView"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_weight="1" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/profile_page_badge1_imageView"
+                                android:layout_width="0dp"
+                                android:layout_height="120dp"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/profile_page_badge2_imageView"
+                                android:layout_width="0dp"
+                                android:layout_height="120dp"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/profile_page_badge3_imageView"
+                                android:layout_width="0dp"
+                                android:layout_height="120dp"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
 
+                </android.support.v7.widget.CardView>
 
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_aboutMe_cardView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
-
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_aboutMe_cardView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="About Me"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorPrimary" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/profile_page_aboutMe_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black" />
+                            android:gravity="center"
+                            android:text="About Me"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/profile_page_aboutMe_editText"
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimary" />
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:visibility="invisible" />
+                            android:layout_marginTop="10dp">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/profile_page_aboutMe_textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                            <EditText
+                                android:id="@+id/profile_page_aboutMe_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:visibility="invisible" />
 
-                        <ImageView
-                            android:id="@+id/profile_page_aboutMe_edit"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/edit" />
+                        </RelativeLayout>
 
-                        <ImageView
-                            android:id="@+id/profile_page_aboutMe_save"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/save"
-                            android:visibility="invisible" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:id="@+id/profile_page_aboutMe_edit"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/edit" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                            <ImageView
+                                android:id="@+id/profile_page_aboutMe_save"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/save"
+                                android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/profile_page_my_favorite_textView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="My favorite"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                        </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_sports_activities_cardView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/profile_page_my_favorite_textView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="My favorite"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Sports/Activities"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorPrimary" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/profile_page_sports_activities_textView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black" />
-
-                        <EditText
-                            android:id="@+id/profile_page_sports_activities_editText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:visibility="invisible" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/profile_page_sports_activities_edit"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/edit" />
-
-                        <ImageView
-                            android:id="@+id/profile_page_sports_activities_save"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/save"
-                            android:visibility="invisible" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_hobbies_interests_cardView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
-
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_sports_activities_cardView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Hobbies/Interests"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorPrimary" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/profile_page_hobbies_interests_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black" />
+                            android:gravity="center"
+                            android:text="Sports/Activities"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/profile_page_hobbies_interests_editText"
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimary" />
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:visibility="invisible" />
+                            android:layout_marginTop="10dp">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/profile_page_sports_activities_textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                            <EditText
+                                android:id="@+id/profile_page_sports_activities_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:visibility="invisible" />
 
-                        <ImageView
-                            android:id="@+id/profile_page_hobbies_interests_edit"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/edit" />
+                        </RelativeLayout>
 
-                        <ImageView
-                            android:id="@+id/profile_page_hobbies_interests_save"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/save"
-                            android:visibility="invisible" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:id="@+id/profile_page_sports_activities_edit"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/edit" />
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                            <ImageView
+                                android:id="@+id/profile_page_sports_activities_save"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/save"
+                                android:visibility="invisible" />
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_page_places_cardView"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="10dp"
-                app:contentPadding="5dp">
+                        </RelativeLayout>
 
-                <LinearLayout
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_hobbies_interests_cardView"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Places in Neighbourhood"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorPrimary" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/profile_page_places_textView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black" />
+                            android:gravity="center"
+                            android:text="Hobbies/Interests"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/profile_page_places_editText"
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimary" />
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:visibility="invisible" />
+                            android:layout_marginTop="10dp">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/profile_page_hobbies_interests_textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
 
-                    <RelativeLayout
+                            <EditText
+                                android:id="@+id/profile_page_hobbies_interests_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/profile_page_hobbies_interests_edit"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/edit" />
+
+                            <ImageView
+                                android:id="@+id/profile_page_hobbies_interests_save"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/save"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_page_places_cardView"
+                    android:focusableInTouchMode="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp"
+                    app:contentPadding="5dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/profile_page_places_edit"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/edit" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Places in Neighbourhood"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/profile_page_places_save"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/save"
-                            android:visibility="invisible" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimary" />
 
-                    </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                            <TextView
+                                android:id="@+id/profile_page_places_textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
 
-        </LinearLayout>
+                            <EditText
+                                android:id="@+id/profile_page_places_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:visibility="invisible" />
 
-    </ScrollView>
+                        </RelativeLayout>
 
-    <Button
-        android:id="@+id/profile_page_save_changes_permanantly"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="Save Changes Permanantly"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:visibility="gone" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-</RelativeLayout>
+                            <ImageView
+                                android:id="@+id/profile_page_places_edit"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/edit" />
 
+                            <ImageView
+                                android:id="@+id/profile_page_places_save"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@mipmap/save"
+                                android:visibility="invisible" />
 
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/profile_page_save_changes_permanantly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:text="Save Changes Permanantly"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</FrameLayout>
 
 

@@ -1,6 +1,8 @@
 package com.upitt.ruc.Views.NewsFeed;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -31,6 +34,7 @@ public class Post_Adapter extends RecyclerView.Adapter {
     private final int POST_TEXT_AUDIO = 2;
     private final int POST_TEXT_VIDEO = 3;
     private final int POST_TEXT_IMAGE = 4;
+    private final int POST_HEADER = 5;
 
     private ArrayList<Post> posts;
     Context context;
@@ -48,17 +52,17 @@ public class Post_Adapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
 
-        if ((posts.get(position).getFile_type()).equals("text"))
+        if (position == 0)
+            return POST_HEADER;
+        else if ((posts.get(position).getFile_type()).equals("text"))
             return POST_TEXT;
-
-        if ((posts.get(position).getFile_type()).equals("text_image"))
+        else if ((posts.get(position).getFile_type()).equals("text_image"))
             return POST_TEXT_IMAGE;
-
-        if ((posts.get(position).getFile_type()).equals("text_audio"))
+        else if ((posts.get(position).getFile_type()).equals("text_audio"))
             return POST_TEXT_AUDIO;
-
-        if ((posts.get(position).getFile_type()).equals("text_video"))
+        else if ((posts.get(position).getFile_type()).equals("text_video"))
             return POST_TEXT_VIDEO;
+
 
 
         throw new IllegalArgumentException(
@@ -73,6 +77,7 @@ public class Post_Adapter extends RecyclerView.Adapter {
 
         View mainView;
 
+        Log.i("Test", Integer.toString(viewType));
 
         if (viewType == POST_TEXT) {
             mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_text, parent, false);
@@ -86,6 +91,9 @@ public class Post_Adapter extends RecyclerView.Adapter {
         } else if (viewType == POST_TEXT_VIDEO) {
             mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_text_video, parent, false);
             return new Post_Text_Video_Holder(mainView);
+        } else if (viewType == POST_HEADER) {
+            mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_header, parent, false);
+            return new Post_Header(mainView);
         } else
             throw new IllegalArgumentException("ViewType " + viewType + " is not supported");
     }
@@ -175,10 +183,74 @@ public class Post_Adapter extends RecyclerView.Adapter {
             ((Post_Text_Video_Holder) holder).post_text_video_videoView.setVideoPath(post.getResource_URL());
             ((Post_Text_Video_Holder) holder).post_text_video_videoView.setMediaController(new MediaController(context));
             //((Post_Text_Video_Holder) holder).post_text_video_videoView.start();
+        } else if (holder instanceof Post_Header) {
+
+            ((Post_Header) holder).post_header_audio_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    testMethod((Post_Header) holder);
+                }
+            });
+
+            ((Post_Header) holder).post_header_video_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    testMethod((Post_Header) holder);
+                }
+            });
+
+            ((Post_Header) holder).post_header_photo_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    testMethod((Post_Header) holder);
+                }
+            });
+
+            ((Post_Header) holder).post_header_post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    new AlertDialog.Builder(((Post_Header) holder).post_header_audio_layout.getContext())
+                            .setTitle("Are you sure?")
+                            .setMessage("Are you sure you want to post???")
+                            .setPositiveButton("Post", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    ((Post_Header) holder).post_header_layout.setVisibility(View.GONE);
+                                    ((Post_Header) holder).post_header_description.setEnabled(false);
+                                    //Toast.makeText(MainActivity.this, "Post uploaded successfully", Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            })
+                            .setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            })
+                            .show();
+
+
+                }
+            });
+
+            ((Post_Header) holder).post_header_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    ((Post_Header) holder).post_header_layout.setVisibility(View.GONE);
+                    ((Post_Header) holder).post_header_description.setEnabled(false);
+                }
+            });
         }
 
-
     }
+
+
+
 
 
     public void playCycle(final SeekBar seekBar, final MediaPlayer mediaPlayer) {
@@ -248,4 +320,11 @@ public class Post_Adapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return posts.size();
     }
+
+    public void testMethod(Post_Header holder) {
+        holder.post_header_layout.setVisibility(View.VISIBLE);
+        holder.post_header_description.setEnabled(true);
+    }
 }
+
+

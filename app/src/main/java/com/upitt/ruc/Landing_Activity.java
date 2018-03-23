@@ -45,6 +45,17 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_);
 
+
+        if (getGoogleApiClient() != null && getGoogleApiClient().isConnected()) {
+
+            Log.i("User", "Signed In");
+
+            //memail = account.getEmail();
+        } else {
+            // not signed in. Show the "sign in" button and explanation.
+            // ...
+        }
+
         landing_activity_progressbar = (ProgressBar) findViewById(R.id.landing_activity_progressbar);
         landing_activity_parent_layout = (LinearLayout) findViewById(R.id.landing_activity_parent_layout);
         signin = (SignInButton)findViewById(R.id.login);
@@ -120,10 +131,10 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void processFinish(String output) {
 
-        Log.i("Test", output);
+        //Log.i("Test", output);
         if (output.equals("usernotpresent"))
         {
-            Log.i("Test", output);
+            // Log.i("Test", output);
             Intent intent = new Intent(Landing_Activity.this,Reg_Code.class);
             intent.putExtra("email",memail);
             intent.putExtra("displayName", mdisplayName);
@@ -138,7 +149,7 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             intent.putExtra("email",memail);
             intent.putExtra("name", mdisplayName);
             intent.putExtra("ImgURL", mImgURL);
-            Log.i("Test","Here");
+            //Log.i("Test","Here");
 //            landing_activity_parent_layout.setVisibility(View.VISIBLE);
 //            landing_activity_progressbar.setVisibility(View.GONE);
             startActivity(intent);

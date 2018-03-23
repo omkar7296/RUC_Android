@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.upitt.ruc.Entities.Post;
 import com.upitt.ruc.R;
@@ -45,6 +46,9 @@ public class News_Feed_Fragment extends Fragment {
 
         mContext = rootView.getContext();
         ButterKnife.bind(this, rootView);
+
+
+        posts.add(null);
 
         posts.add(new Post(1,
                 "Here is a sample description",

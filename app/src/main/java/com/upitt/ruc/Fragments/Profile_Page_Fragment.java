@@ -697,6 +697,9 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
         Glide.with(this).load(profile.getBadge2_url()).into(profile_page_badge2_imageView);
         Glide.with(this).load(profile.getBadge3_url()).into(profile_page_badge3_imageView);
 
+        fragment_profile_page_progressbar.setVisibility(View.GONE);
+        fragment_profile_page_parentLayout.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -705,7 +708,7 @@ public class Profile_Page_Fragment extends android.support.v4.app.Fragment imple
         if (output.equals("success")) {
             Toast.makeText(mcontext, "Profile updated successfully", Toast.LENGTH_SHORT).show();
             profile_page_save_changes_permanantly.setVisibility(View.GONE);
-        } else if (output.equals("failed")) ;
+        } else
         {
             Toast.makeText(mcontext, "Profile update failed. Please try again", Toast.LENGTH_SHORT).show();
         }

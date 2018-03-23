@@ -62,6 +62,7 @@ public class No_Reg_Code extends AppCompatActivity implements Reg_code_Request_I
             Intent intent = new Intent(No_Reg_Code.this,Reg_Code_Req_Received.class);
             //Log.i("Test","Here");
             startActivity(intent);
+            finish();
         }
         else
         {

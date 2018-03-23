@@ -23,7 +23,9 @@
         <activity android:name=".Home" />
         <activity android:name=".No_Reg_Code" />
         <activity android:name=".Reg_Code_Req_Received" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme1"></activity>
     </application>
 
 </manifest>

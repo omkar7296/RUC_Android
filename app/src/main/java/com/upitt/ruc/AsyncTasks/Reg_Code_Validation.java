@@ -115,8 +115,8 @@ public class Reg_Code_Validation extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
 
-        activity_reg_code_progressbar.setVisibility(View.GONE);
-        activity_reg_code_parentLayout.setVisibility(View.VISIBLE);
+//        activity_reg_code_progressbar.setVisibility(View.GONE);
+//        activity_reg_code_parentLayout.setVisibility(View.VISIBLE);
         delegate.processFinish(result);
     }
 }

@@ -109,8 +109,8 @@ public class Reg_code_Request_Insert extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        activity_no_reg_code_progressbar.setVisibility(View.GONE);
-        activity_no_reg_code_parentLayout.setVisibility(View.VISIBLE);
+//        activity_no_reg_code_progressbar.setVisibility(View.GONE);
+//        activity_no_reg_code_parentLayout.setVisibility(View.VISIBLE);
         delegate.processFinish(result);
     }
 }

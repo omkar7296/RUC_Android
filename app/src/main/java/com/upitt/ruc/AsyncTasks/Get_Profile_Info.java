@@ -139,8 +139,8 @@ public class Get_Profile_Info extends AsyncTask<String, Void, String> {
 //            if(lived_since != "null")
 //                Log.i("TEst",lived_since);
 
-                fragment_profile_page_progressbar.setVisibility(View.GONE);
-                fragment_profile_page_parentLayout.setVisibility(View.VISIBLE);
+//                fragment_profile_page_progressbar.setVisibility(View.GONE);
+//                fragment_profile_page_parentLayout.setVisibility(View.VISIBLE);
 
                 delegate.processFinish(about_me, sports_activities, hobbies_interests, places, location, lived_since, name, photo, points);
             }

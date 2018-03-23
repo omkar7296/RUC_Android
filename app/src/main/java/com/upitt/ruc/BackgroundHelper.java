@@ -114,8 +114,7 @@ public class BackgroundHelper extends AsyncTask<String,Void,String>{
     @Override
     protected void onPostExecute(String result)
     {
-        landing_activity_parent_layout.setVisibility(View.VISIBLE);
-        landing_activity_progressbar.setVisibility(View.GONE);
+
         delegate.processFinish(result);
     }
 

@@ -93,7 +93,7 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
                 mImgURL = account.getPhotoUrl().toString();
             }
             //mfamilyName = account.getFamilyName();
-            mdisplayName = account.getGivenName();
+            mdisplayName = account.getDisplayName();
 
             String type = "check_user_account";
 
@@ -129,12 +129,18 @@ public class Landing_Activity extends AppCompatActivity implements GoogleApiClie
             intent.putExtra("displayName", mdisplayName);
             intent.putExtra("ImgURL", mImgURL);
 
+//            landing_activity_parent_layout.setVisibility(View.VISIBLE);
+//            landing_activity_progressbar.setVisibility(View.GONE);
             startActivity(intent);
             finish();
         } else if (output.equals("userpresent")) {
             Intent intent = new Intent(Landing_Activity.this, MainActivity.class);
             intent.putExtra("email",memail);
+            intent.putExtra("name", mdisplayName);
+            intent.putExtra("ImgURL", mImgURL);
             Log.i("Test","Here");
+//            landing_activity_parent_layout.setVisibility(View.VISIBLE);
+//            landing_activity_progressbar.setVisibility(View.GONE);
             startActivity(intent);
             finish();
 

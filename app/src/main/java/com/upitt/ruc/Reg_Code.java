@@ -81,11 +81,16 @@ public class Reg_Code extends AppCompatActivity implements Reg_Code_Validation.R
         Log.i("Test", output);
         if (output.equals("accountcreated"))
         {
-            Intent intent = new Intent(Reg_Code.this,Home.class);
+            Intent intent = new Intent(Reg_Code.this, MainActivity.class);
             intent.putExtra("email",memail);
+            intent.putExtra("name", mdisplayName);
+            intent.putExtra("ImgURL", mImgURL);
             //Log.i("Test","Here");
             startActivity(intent);
+            finish();
         } else if (output.equals("codeerror")) {
+            activity_reg_code_progressbar.setVisibility(View.GONE);
+            activity_reg_code_parentLayout.setVisibility(View.VISIBLE);
             textView.setText("Please check your Registration code!!");
             textView.setVisibility(View.VISIBLE);
             editText.getText().clear();
